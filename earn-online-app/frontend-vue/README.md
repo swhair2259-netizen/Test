@@ -52,7 +52,7 @@ To get started with the Vue frontend, follow these steps:
    npm run serve
    ```
 
-4. Open your browser and navigate to `http://localhost:8080` to view the application.
+4. Open your browser and navigate to `http://localhopst:8080` to view the application.
 
 ## Deployment
 
