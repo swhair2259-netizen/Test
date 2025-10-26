@@ -1,0 +1,46 @@
+# Ignore the node_modules directory
+node_modules
+
+# Ignore build artifacts
+build
+dist
+
+# Ignore log files
+*.log
+
+# Ignore environment variable files
+.env
+
+# Ignore Dockerfile and docker-compose.yml for the frontend
+frontend-react/Dockerfile
+frontend-vue/Dockerfile
+docker-compose.yml
+
+# Ignore any temporary files
+*.tmp
+*.temp
+
+# Ignore coverage reports
+coverage
+
+# Ignore IDE specific files
+.vscode
+.idea
+
+# Ignore any other files that are not needed in the Docker image
+*.md
+*.json
+*.ts
+*.tsx
+*.vue
+*.html
+*.css
+*.scss
+*.png
+*.jpg
+*.gif
+*.svg
+*.woff
+*.woff2
+*.ttf
+*.eot

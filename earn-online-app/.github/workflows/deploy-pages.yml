@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          cd frontend-react
+          npm install
+          cd ../frontend-vue
+          npm install
+
+      - name: Build React app
+        run: |
+          cd frontend-react
+          npm run build
+
+      - name: Build Vue app
+        run: |
+          cd frontend-vue
+          npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./frontend-react/build
+          publish_dir: ./frontend-vue/dist
+          publish_branch: gh-pages
+          publish_dir: ./frontend-react/build
+          publish_dir: ./frontend-vue/dist
+          destination_dir: ./

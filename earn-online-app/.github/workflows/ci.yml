@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          cd frontend-react
+          npm install
+          cd ../frontend-vue
+          npm install
+          cd ../api
+          npm install
+
+      - name: Run tests
+        run: |
+          cd frontend-react
+          npm test -- --watchAll=false
+          cd ../frontend-vue
+          npm test -- --watchAll=false
+          cd ../api
+          npm test -- --watchAll=false
+
+      - name: Build frontend
+        run: |
+          cd frontend-react
+          npm run build
+          cd ../frontend-vue
+          npm run build
+
+      - name: Build API
+        run: |
+          cd api
+          npm run build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: |
+            frontend-react/build
+            frontend-vue/dist
+            api/build
